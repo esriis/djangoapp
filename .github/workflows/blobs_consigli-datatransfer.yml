@@ -6,7 +6,7 @@ name: Build and deploy Python app to Azure Web App - consigli-postgresql-app
 on:
   push:
     branches:
-      - master
+      - blobs
   workflow_dispatch:
 
 jobs:
