@@ -1,4 +1,4 @@
 set DBHOST=localhost
 set DBUSER=manager
-set DBNAME=pollsdb
+set DBNAME=blobdatabase
 set DBPASS=supersecretpass
