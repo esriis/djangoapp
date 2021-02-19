@@ -32,9 +32,9 @@ def readTable():
     
     
     if not filePath.is_file():
-        return "File not found. readTable directory: " + print(Path.cwd())
+        return "File not found. readTable directory: " + Path.cwd().as_posix()
     if True:
-        return "File found, not running anything. readTable directory: " + print(Path.cwd())
+        return "File found, not running anything. readTable directory: " + Path.cwd().as_posix()
 
     @dataclass
     @dateformat('%d/%m/%Y %H:%M:%S')
