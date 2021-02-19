@@ -9,8 +9,9 @@ def index(request):
 
 def update_view(request):
     tablePath = Path("input/tableIn.csv")
+    newString = tablePath.absolute().as_posix()
     if tablePath.is_file():
         response = readTable()
         return HttpResponse(response)
     else:
-        return HttpResponse("views: No file found: " + Path.cwd().as_posix())
+        return HttpResponse("views: No file found: " + Path.cwd().as_posix() + ". Dir: " + newString)
