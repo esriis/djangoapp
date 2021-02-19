@@ -10,7 +10,7 @@ Created on Tue Feb 16 17:31:59 2021
 from dataclasses import dataclass
 from dataclass_csv import DataclassReader, dateformat
 import datetime
-from newApp.models import Client, Building, Project, Blob
+from blobdatabase.models import Client, Building, Project, Blob
 import pytz
 import django.conf
 from django.utils.timezone import make_aware
@@ -26,8 +26,7 @@ def readTable():
 
     tz = pytz.timezone('Europe/Oslo')
 
-    filename = "/Users/erlendsriis/Documents/sannsyn/consigli/python/sh"+\
-        "arepointTest/powershell-script/test.csv"
+    filename = "input/tableIn.csv"
 
 
     @dataclass
