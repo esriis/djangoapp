@@ -26,7 +26,7 @@ def readTable():
 
     tz = pytz.timezone('Europe/Oslo')
 
-    filename = "input/tableIn.csv"
+    filename = "../input/tableIn.csv"
 
 
     @dataclass
