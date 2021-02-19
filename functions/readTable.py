@@ -14,6 +14,7 @@ from blobdatabase.models import Client, Building, Project, Blob
 import pytz
 import django.conf
 from django.utils.timezone import make_aware
+from pathlib import Path
 
 
 def readTable():
@@ -27,7 +28,13 @@ def readTable():
     tz = pytz.timezone('Europe/Oslo')
 
     filename = "../input/tableIn.csv"
-
+    filePath = Path(filename)
+    
+    
+    if not filePath.is_file():
+        return "File not found"
+    if True:
+        return "File found, not running anything"
 
     @dataclass
     @dateformat('%d/%m/%Y %H:%M:%S')
@@ -93,4 +100,5 @@ def readTable():
                     extension = item.extension,
                     project = p)
         blob.save()
+    return "Done!"
 
