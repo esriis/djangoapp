@@ -1,4 +1,4 @@
 set DBHOST=localhost
 set DBUSER=manager
-set DBNAME=blobdatabase
+set DBNAME=blobdata
 set DBPASS=supersecretpass
