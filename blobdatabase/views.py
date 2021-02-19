@@ -8,7 +8,7 @@ def index(request):
     return HttpResponse("Hello, world. You're at the blobstore index.")
 
 def update_view(request):
-    tablePath = Path("../input/tableIn.csv")
+    tablePath = Path("../../input/tableIn.csv")
     if tablePath.is_file():
         response = readTable()
         return HttpResponse(response)
