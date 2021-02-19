@@ -13,4 +13,4 @@ def update_view(request):
         response = readTable()
         return HttpResponse(response)
     else:
-        return HttpResponse("views: No file found")
+        return HttpResponse("views: No file found: " + print(Path.cwd()))
