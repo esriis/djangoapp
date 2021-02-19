@@ -1,4 +1,4 @@
-$Env:DBHOST = "localhost"
-$Env:DBUSER = "manager"
+$Env:DBHOST = "consigli-data"
+$Env:DBUSER = "dataAdmin"
 $Env:DBNAME = "blobdata"
-$Env:DBPASS = "supersecretpass"
+$Env:DBPASS = "Consigli1"
