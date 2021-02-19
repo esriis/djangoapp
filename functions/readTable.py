@@ -25,7 +25,7 @@ def readTable():
     aware_datetime = make_aware(naive_datetime)
     aware_datetime.tzinfo  # <UTC>
 
-    tz = pytz.timezone('Europe/Oslo')
+    tz = pytz.timezone('UTC')
 
     filename = "tables/tableIn.csv"
     filePath = Path(filename)
