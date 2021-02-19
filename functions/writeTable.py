@@ -8,7 +8,7 @@ Created on Fri Feb 19 13:56:18 2021
 
 
 import csv
-from newApp.models import Blob
+from blobdatabase.models import Blob
 
 
 def writeTable():
