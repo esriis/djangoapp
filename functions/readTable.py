@@ -27,12 +27,12 @@ def readTable():
 
     tz = pytz.timezone('Europe/Oslo')
 
-    filename = "../input/tableIn.csv"
+    filename = "tables/tableIn.csv"
     filePath = Path(filename)
     
     
     if not filePath.is_file():
-        return "File not found. readTable directory: " + Path.cwd().as_posix()
+        return "File not found. readTable directory: " + Path.cwd().as_posix() + ". search dir: " + filePath.absolute().as_posix()
     if True:
         return "File found, not running anything. readTable directory: " + Path.cwd().as_posix()
 
