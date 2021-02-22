@@ -2,28 +2,50 @@ from django.shortcuts import render
 from django.http import HttpResponse
 from functions.readTable import readTable
 from functions.writeTable import writeTable
-from pathlib import Path
+from django.contrib.auth import authenticate, login, logout
+from django.views.decorators.csrf import csrf_exempt
+from .forms import UploadFileForm
 
 
 def index(request):
-    return HttpResponse("Hello, world. You're at the blobstore index.")
+    return HttpResponse("Hello, world. You're at the blobdatabase index.")
 
-def update_view(request):
-    tablePath = Path("tables/tableIn.csv")
-    newString = tablePath.absolute().as_posix()
-    if tablePath.is_file():
-        response = readTable()
-        return HttpResponse(response)
+@csrf_exempt
+def download_view(request):
+    if request.method == 'POST':
+        username = request.POST['username']
+        password = request.POST['password']
+        user = authenticate(request, username=username, password=password)
+        if user is not None:
+            login(request, user)
+            response = writeTable()
+            logout(request)
+            return(response)
+        else:
+            return HttpResponse("Login unsuccessful.")
     else:
-        return HttpResponse("No file uploaded.")
+        return HttpResponse("Login details required.")
     
-def write_view(request):
-    tablePath = Path("tables/tableOut.csv")
-    if tablePath.is_file():
-        return HttpResponse("Table already exists.")
+    
+@csrf_exempt
+def upload_view(request):
+    if request.method == 'POST':
+        username = request.POST['username']
+        password = request.POST['password']
+        user = authenticate(request, username=username, password=password)
+        if user is not None:
+            login(request, user)
+            # form = UploadFileForm(request.POST, request.FILES)
+            # print(form.title)
+            # print(form.file)
+            # if form.is_valid():
+            response = readTable(request.FILES['file'])
+            # else:
+            #     response = "Uh oh."
+            logout(request)
+            return HttpResponse(response)
+        else:
+            return HttpResponse("Login unsuccessful.")
     else:
-        writeTable()
-        return HttpResponse("Did this work?")
-        
-    
+        return HttpResponse("Requires POST")
    
