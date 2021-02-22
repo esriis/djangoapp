@@ -4,7 +4,7 @@ from functions.readTable import readTable
 from functions.writeTable import writeTable
 from django.contrib.auth import authenticate, login, logout
 from django.views.decorators.csrf import csrf_exempt
-from .forms import UploadFileForm
+# from .forms import UploadFileForm
 
 
 def index(request):
