@@ -15,11 +15,11 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import include, path
-from blobdatabase.views import update_view, write_view
+from blobdatabase.views import download_view, upload_view
 
 urlpatterns = [
-    path('update',update_view),
-    path('write',write_view),
+    path('upload',upload_view),
+    path('download',download_view),
     path('', include('blobdatabase.urls')),
     path('admin/', admin.site.urls),
 ]
