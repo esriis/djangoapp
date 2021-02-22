@@ -14,10 +14,8 @@ from blobdatabase.models import Client, Building, Project, Blob
 import pytz
 import django.conf
 from django.utils.timezone import make_aware
-from pathlib import Path
 
-
-def readTable():
+def readTable(f):
     naive_datetime = datetime.datetime.now()
     naive_datetime.tzinfo  # None
 
@@ -26,15 +24,6 @@ def readTable():
     aware_datetime.tzinfo  # <UTC>
 
     tz = pytz.timezone('UTC')
-
-    filename = "tables/tableIn.csv"
-    filePath = Path(filename)
-    
-    
-    if not filePath.is_file():
-        return "File not found. readTable directory: " + Path.cwd().as_posix() + ". search dir: " + filePath.absolute().as_posix()
-    if True:
-        return "File found, not running anything. readTable directory: " + Path.cwd().as_posix()
 
     @dataclass
     @dateformat('%d/%m/%Y %H:%M:%S')
@@ -52,10 +41,9 @@ def readTable():
         extension: str
 
 
-
-    with open(filename) as users_csv:
-        reader = DataclassReader(users_csv, fileItem)
-        itemList = list(reader)
+    fStr = (line.decode('utf8') for line in f)
+    reader = DataclassReader(fStr,fileItem)    
+    itemList = list(reader)
 
     for item in itemList:
 
@@ -100,5 +88,5 @@ def readTable():
                     extension = item.extension,
                     project = p)
         blob.save()
-    return "Done!"
+    
 
