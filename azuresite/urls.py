@@ -21,6 +21,6 @@ urlpatterns = [
     path('upload',upload_view),
     path('delete',delete_view),
     path('download',download_view),
-    path('newApp/', include('newApp.urls')),
+    path('blobdatabase/', include('blobdatabase.urls')),
     path('admin/', admin.site.urls),
 ]
