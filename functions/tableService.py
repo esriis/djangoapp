@@ -11,7 +11,7 @@ from dataclasses import dataclass
 from dataclass_csv import DataclassReader, dateformat
 import csv
 import datetime
-from newApp.models import Client, Building, Project, Blob
+from blobdatabase.models import Client, Building, Project, Blob
 import pytz
 import django.conf
 from django.utils.timezone import make_aware
