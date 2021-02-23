@@ -18,7 +18,7 @@ from django.utils.timezone import make_aware
 from django.http import HttpResponse
 
 
-def uploadTable(f):
+def updateTable(f):
     itemList = csv2List(f)
     
     naive_datetime = datetime.datetime.now()
