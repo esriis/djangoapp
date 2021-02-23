@@ -69,6 +69,6 @@ def delete_view(request):
             logout(request)
             return HttpResponse(response)
         else:
-            return HttpResponse("Login unsuccessful!")
+            return HttpResponse("Login unsuccessful! Username: " + username + ". Pw: " + password[0:3])
     else:
         return HttpResponse("Requires POST")
