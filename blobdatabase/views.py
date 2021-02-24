@@ -108,10 +108,10 @@ def uploadFTP_view(request):
         user = authenticate(request, username=username, password=password)
         if user is not None:
             login(request, user)
-            path = "tables/uploadTable.csv"
+            path = "tables/uploadTable2.csv"
             if Path(path).is_file():
                 response = uploadTable(open(path))
-            #    Path(path).unlink()
+                Path(path).unlink()
             else:
                 response = "File not found."
             # else:
