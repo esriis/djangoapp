@@ -3,6 +3,7 @@ from django.http import HttpResponse
 from functions.tableService import uploadTable, deleteTable, writeTable
 from django.contrib.auth import authenticate, login, logout
 from django.views.decorators.csrf import csrf_exempt
+from pathlib import Path
 # from .forms import UploadFileForm
 
 
