@@ -111,7 +111,7 @@ def uploadFTP_view(request):
             path = "tables/uploadTable.csv"
             if Path(path).is_file():
                 response = uploadTable(open(path))
-                Path(path).unlink()
+            #    Path(path).unlink()
             else:
                 response = "File not found."
             # else:
