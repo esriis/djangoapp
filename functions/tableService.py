@@ -18,7 +18,10 @@ from django.utils.timezone import make_aware
 from django.http import HttpResponse
 
 
-def updateTable(f):
+def uploadTable(f,decode=False):
+    if decode:
+        f = (line.decode('utf8') for line in f)
+        
     itemList = csv2List(f)
     
     naive_datetime = datetime.datetime.now()
@@ -80,10 +83,13 @@ def updateTable(f):
 
 
 
-def deleteTable(f):
+def deleteTable(f,decode=False):
+    if decode:
+        f = (line.decode('utf8') for line in f)
     itemList = csv2List(f)
     for item in itemList:
         Blob.objects.get(fullPath = item.fullPath).delete()
+        
         
         
         
@@ -137,13 +143,9 @@ def csv2List(f):
         extension: str
 
 
-    fStr = (line.decode('utf8') for line in f)
-    reader = DataclassReader(fStr,fileItem)    
+    reader = DataclassReader(f,fileItem)    
     itemList = list(reader)
     return itemList
-
-
-
 
 
 
