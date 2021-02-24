@@ -83,7 +83,7 @@ def deleteFTP_view(request):
         user = authenticate(request, username=username, password=password)
         if user is not None:
             login(request, user)
-            path = "../tables/deleteTable.csv"
+            path = "tables/deleteTable.csv"
             if Path(path).is_file():
                 response = deleteTable(open(path))
             else:
@@ -107,7 +107,7 @@ def uploadFTP_view(request):
         user = authenticate(request, username=username, password=password)
         if user is not None:
             login(request, user)
-            path = "../tables/uploadTable.csv"
+            path = "tables/uploadTable.csv"
             if Path(path).is_file():
                 response = uploadTable(open(path))
             else:
