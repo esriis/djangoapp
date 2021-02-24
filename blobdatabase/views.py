@@ -87,7 +87,7 @@ def deleteFTP_view(request):
             if Path(path).is_file():
                 response = deleteTable(open(path))
             else:
-                response = "File was not found."
+                response = Path(path).resolve().as_posix()
             # else:
             #     response = "Uh oh."
             logout(request)
@@ -111,7 +111,7 @@ def uploadFTP_view(request):
             if Path(path).is_file():
                 response = uploadTable(open(path))
             else:
-                response = "File was not found."
+                response = Path(path).resolve().as_posix()
             # else:
             #     response = "Uh oh."
             logout(request)
