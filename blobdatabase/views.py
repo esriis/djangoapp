@@ -85,7 +85,7 @@ def deleteFTP_view(request):
             login(request, user)
             path = "tables/deleteTable.csv"
             if Path(path).is_file():
-                response = deleteTable(open(path))
+                response = deleteTable(open(path,encoding='utf-8-sig'))
                 Path(path).unlink()
             else:
                 response = "File not found."
@@ -108,9 +108,9 @@ def uploadFTP_view(request):
         user = authenticate(request, username=username, password=password)
         if user is not None:
             login(request, user)
-            path = "tables/uploadTable2.csv"
+            path = "tables/uploadTable.csv"
             if Path(path).is_file():
-                response = uploadTable(open(path))
+                response = uploadTable(open(path,encoding='utf-8-sig'))
                 Path(path).unlink()
             else:
                 response = "File not found."
