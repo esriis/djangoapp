@@ -36,5 +36,7 @@ class Blob(models.Model):
     createdBy = models.CharField(max_length=100)
     guid = models.CharField(max_length=50,unique=True)
     extension = models.CharField(max_length=30)
+    class Meta:
+        ordering = ['guid']
     def __str__(self):
         return self.fullPath 
