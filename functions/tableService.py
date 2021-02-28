@@ -59,7 +59,7 @@ def uploadTable(f,decode=False):
         if subProjectRef.exists():
             s = subProjectRef[0]
         else:
-            s = SubProject(datatype=item.dataType,project=p)
+            s = SubProject(dataType=item.dataType,project=p)
             s.save()
 
         # Blob
