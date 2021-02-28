@@ -11,7 +11,7 @@ from dataclasses import dataclass
 from dataclass_csv import DataclassReader, dateformat
 import csv
 import datetime
-from blobdatabase.models import Client, Building, Project, Blob
+from blobdatabase.models import Client, Project, SubProject, Blob
 import pytz
 import django.conf
 from django.utils.timezone import make_aware
@@ -43,39 +43,39 @@ def uploadTable(f,decode=False):
             c = Client(name=item.client)
             c.save()
 
-        # Building
-        buildingRef = Building.objects.filter(name=item.building,
-                                              client__name=item.client)
-        if buildingRef.exists():
-            b = buildingRef[0]
-        else:
-            b = Building(name=item.building,client=c)
-            b.save()
-
         # Project
-        projectRef = Project.objects.filter(building__name=item.building,
-                                            building__client__name=item.client,
-                                            name=item.project)
+        projectRef = Project.objects.filter(name=item.project,
+                                              client__name=item.client)
         if projectRef.exists():
             p = projectRef[0]
         else:
-            p = Project(name=item.project,building=b)
+            p = Project(name=item.project,client=c)
             p.save()
 
+        # Subproject
+        subProjectRef = SubProject.objects.filter(project__name=item.project,
+                                            project__client__name=item.client,
+                                            dataType=item.dataType)
+        if subProjectRef.exists():
+            s = subProjectRef[0]
+        else:
+            s = SubProject(datatype=item.dataType,project=p)
+            s.save()
+
         # Blob
-        blobRef = Blob.objects.filter(fullPath=item.fullPath)
+        blobRef = Blob.objects.filter(guid=item.guid)
         if blobRef.exists():
             blobRef.delete()
-        blob = Blob(name = item.name,
+        b = Blob(name = item.name,
                     fullPath = item.fullPath,
                     modifiedDate = tz.localize(item.modifiedDate),
-                    createdDate = tz.localize(item.createdDate),
+                    # createdDate = tz.localize(item.createdDate),
                     modifiedBy = item.modifiedBy,
-                    createdBy = item.createdBy,
+                    # createdBy = item.createdBy,
                     guid = item.guid,
                     extension = item.extension,
-                    project = p)
-        blob.save()
+                    subProject = s)
+        b.save()
     
 
 
@@ -103,20 +103,20 @@ def writeTable():
     blobList = Blob.objects.all()        
     writer = csv.writer(response, delimiter=',',
                             quotechar='"', quoting=csv.QUOTE_MINIMAL)
-    writer.writerow(['client','building','project','name','fullPath',
-                          'modifiedDate','createdDate','modifiedBy',
-                          'createdBy','guid','extension'])
+    writer.writerow(['client','project','dataType','name','fullPath',
+                          'modifiedDate','modifiedBy',
+                          'guid','extension'])
     
     for blob in blobList:
-        writer.writerow([blob.project.building.client,
-                              blob.project.building,
-                              blob.project.name,
+        writer.writerow([blob.subProject.project.client,
+                              blob.subProject.project,
+                              blob.subProject.dataType,
                               blob.name,
                               blob.fullPath,
                               blob.modifiedDate.strftime(dateformat),
-                              blob.createdDate.strftime(dateformat),
+                              # blob.createdDate.strftime(dateformat),
                               blob.modifiedBy,
-                              blob.createdBy,
+                              # blob.createdBy,
                               blob.guid,
                               blob.extension])
             
@@ -131,14 +131,14 @@ def csv2List(f):
     @dateformat('%d/%m/%Y %H:%M:%S')
     class fileItem:
         client: str
-        building: str
         project: str
+        dataType: str
         name: str
         fullPath: str
         modifiedDate: datetime.datetime
-        createdDate: datetime.datetime
+        # createdDate: datetime.datetime
         modifiedBy: str
-        createdBy: str
+        # createdBy: str
         guid: str
         extension: str
 
@@ -146,8 +146,6 @@ def csv2List(f):
     reader = DataclassReader(f,fileItem)    
     itemList = list(reader)
     return itemList
-
-
 
 
 
