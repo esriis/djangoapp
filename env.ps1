@@ -1,4 +1,4 @@
-$Env:DBHOST = "localhost"
-$Env:DBUSER = "manager"
-$Env:DBNAME = "pollsdb"
-$Env:DBPASS = "supersecretpass"
+$Env:DBHOST = "consigli-data"
+$Env:DBUSER = "dataAdmin"
+$Env:DBNAME = "blobdata"
+$Env:DBPASS = "Consigli1"

@@ -15,8 +15,14 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import include, path
+from blobdatabase.views import download_view, upload_view, delete_view, deleteFTP_view, uploadFTP_view
 
 urlpatterns = [
-    path('', include('polls.urls')),
+    path('upload',upload_view),
+    path('delete',delete_view),
+    path('deleteFTP',deleteFTP_view),
+    path('uploadFTP',uploadFTP_view),
+    path('download',download_view),
+    path('blobdatabase/', include('blobdatabase.urls')),
     path('admin/', admin.site.urls),
 ]

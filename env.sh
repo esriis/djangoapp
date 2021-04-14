@@ -1,5 +1,4 @@
-export DBHOST="localhost"
-export DBUSER="manager"
-export DBNAME="pollsdb"
-export DBPASS="supersecretpass"
-
+export DBHOST="consigli-data"
+export DBUSER="dataAdmin"
+export DBNAME="blobdata"
+export DBPASS="Consigli1"
